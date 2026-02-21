@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General Design" href="../basics/general_design.html" />
+    <link rel="prev" title="Welcome to AuTest’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h1>
+<p>The Reusable Gold Testing System (or AuTest for short) is a gold file testing system design to be extensible to allow customization to easily tailor test definition to be more suitable for the given application being tested.
+The main goal is to provide a solution to a common testing problem that can be reused and customized.</p>
+<section id="vision-statement">
+<h2>Vision statement<a class="headerlink" href="#vision-statement" title="Link to this heading">¶</a></h2>
+<p>The testing system design is based on the idea to be customized.
+Most testing systems are very similar to each other and in general, differ on in functionality needed to test a certain domain of applications.
+A testing system for a build system might have special functions added to make it easy to test a build run,
+while a testing system for a multi-threaded library might have a different set to make it easy to test building and running variable use cases.
+In general, the inability to adapt one testing system to test a different application are hard coded design decisions that make it impossible
+or very difficult to adapt or use for a different set of applications.
+The user can add, or override functionality in the system to adapt it to the needs of the application.
+Nothing is perfect, however, this testing system goal is to be reusable, but it is expected that cases exist that may need tweaks or additions to the engine.
+Overtime and as more user cases are found the ability to extend and customize should improve.</p>
+</section>
+<section id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Easy to write and add tests</p></li>
+<li><p>Define an extensible system to allow:</p>
+<ul>
+<li><p>Adding new functionality for testing your application</p></li>
+<li><p>Batch commands as a new function to make it easier to write tests</p></li>
+<li><p>Define custom report outputs</p></li>
+</ul>
+</li>
+<li><p>Precise as possible error messages to make it easy to see what is wrong fast</p></li>
+<li><p>Sandbox to make it easy to see what failed and reproduce test without of the test system to help with debugging.</p></li>
+<li><p>Flexible gold file syntax to make it easier to ignore text that is not important</p></li>
+</ul>
+</section>
+</section>
+<section id="what-is-gold-file-testing">
+<h1>What is Gold File Testing?<a class="headerlink" href="#what-is-gold-file-testing" title="Link to this heading">¶</a></h1>
+<p>Gold file testing is classically a process of running one or more applications in a certain order and testing that the console or some other file output matches expected values.
+In this testing system, other items that can be tested include:</p>
+<ul class="simple">
+<li><p>Did the process finish?</p>
+<ul>
+<li><p>with an expected return code?</p></li>
+<li><p>within a certain time?</p></li>
+<li><p>Is a process still running, or did it crash?</p></li>
+</ul>
+</li>
+<li><p>Did certain files or directories exist or not exist?</p></li>
+<li><p>Are the files the right size?</p></li>
+<li><p>Does the content of the file or directory contain items we expect to see</p></li>
+</ul>
+<p>Gold testing is a lot like unit testing except that it is done at a process level vs a function API.
+In general this style of testing is often used to test:</p>
+<ul class="simple">
+<li><p>Functionality of a process or plugin/extension to another process</p></li>
+<li><p>Testing a network application or service</p></li>
+<li><p>Test an API or SDK works as expected</p></li>
+<li><p>Testing automation pipelines in which a set of actions should result in an expected outcome</p></li>
+</ul>
+<p>There are many other cases in which this style of testing can be a useful way to validate correctness.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vision-statement">Vision statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/general_design.html">General Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to AuTest’s documentation!</a></li>
+      <li>Next: <a href="../basics/general_design.html" title="next chapter">General Design</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/overview/introduction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

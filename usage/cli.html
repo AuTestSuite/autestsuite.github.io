@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Command Line options &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release Notes" href="../changelog.html" />
+    <link rel="prev" title="Tester namespace" href="../API/testers.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="command-line-options">
+<h1>Command Line options<a class="headerlink" href="#command-line-options" title="Link to this heading">¶</a></h1>
+<p>AuTest provided a number of command and options to control behavior and functionality.</p>
+<section id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Link to this heading">¶</a></h2>
+<p>Command that AuTest supports</p>
+<section id="run">
+<h3>run<a class="headerlink" href="#run" title="Link to this heading">¶</a></h3>
+<p>Find and run the tests.
+This is the default command that will run is no command is provided</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-directory">
+<span class="sig-name descname"><span class="pre">--directory</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span></span><a class="headerlink" href="#cmdoption-autest-run-directory" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-run-D">
+<span class="sig-name descname"><span class="pre">-D</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span></span><a class="headerlink" href="#cmdoption-autest-run-D" title="Link to this definition">¶</a></dt>
+<dd><p>The directory to read the tests from.</p>
+<p><em>Default:</em> The current working directory.</p>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-D<span class="w"> </span>custom/tests
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-autest-site">
+<span class="sig-name descname"><span class="pre">--autest-site</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span> <span class="pre">[path2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-run-autest-site" title="Link to this definition">¶</a></dt>
+<dd><p>A user provided directory for extensions.
+Can be given more than one path. In this case all item will be loaded from both directories in the order of the path values provided.
+If provided the default location will not be used.</p>
+<p><em>Default</em>: to the <cite>autest-site</cite> directory under the path provided by the –directory options, i.e. <cite>./autest-site</cite></p>
+<p><strong>Examples</strong>:</p>
+<p>Use a custom path for the extensions</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-D<span class="w"> </span>custom/tests<span class="w"> </span>--autest-site<span class="w"> </span>~MyExtensions
+</pre></div>
+</div>
+<p>Use more than one path for the extensions.</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-D<span class="w"> </span>custom/tests<span class="w"> </span>--autest-site<span class="w"> </span>path1<span class="w"> </span>path2
+</pre></div>
+</div>
+<p>Can be comma separated</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-D<span class="w"> </span>custom/tests<span class="w"> </span>--autest-site<span class="w"> </span>path1,<span class="w"> </span>path2
+</pre></div>
+</div>
+<p>or can be call multiple times</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-D<span class="w"> </span>custom/tests<span class="w"> </span>--autest-site<span class="w"> </span>path1<span class="w"> </span>--autest-site<span class="w"> </span>path2
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-sandbox">
+<span class="sig-name descname"><span class="pre">--sandbox</span></span><span class="sig-prename descclassname"> <span class="pre">path</span></span><a class="headerlink" href="#cmdoption-autest-run-sandbox" title="Link to this definition">¶</a></dt>
+<dd><p>The directory in which all the test will run.
+This is useful in cases when the default path may be too long to run a test,
+or when unique locations are desired to keep test results around.
+The directory will be cleared before the run to prevent existing data from corrupting the test run.</p>
+<p><strong>Defaults</strong> to the value of <cite>./_sandbox</cite></p>
+<blockquote>
+<div><p>Example:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>--sandbox<span class="w"> </span><span class="s2">&quot;run-</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-jobs">
+<span class="sig-name descname"><span class="pre">--jobs</span></span><span class="sig-prename descclassname"> <span class="pre">N</span></span><a class="headerlink" href="#cmdoption-autest-run-jobs" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-run-j">
+<span class="sig-name descname"><span class="pre">-j</span></span><span class="sig-prename descclassname"> <span class="pre">N</span></span><a class="headerlink" href="#cmdoption-autest-run-j" title="Link to this definition">¶</a></dt>
+<dd><p>the number of tests to run in parallel.</p>
+<p><strong>Currently not implemented beyond 1</strong></p>
+<p><strong>Defaults</strong> to 1 or running test serially</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-env">
+<span class="sig-name descname"><span class="pre">--env</span></span><span class="sig-prename descclassname"> <span class="pre">var=value</span> <span class="pre">[key1=value1]</span></span><a class="headerlink" href="#cmdoption-autest-run-env" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a custom variable to the Environment used for running the tests.
+More than one variable can be added.
+Each variable added will replace any existing values in the current shell environment.</p>
+<p><strong>Examples</strong>:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>--env<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/MyPath:<span class="nv">$PATH</span><span class="w"> </span><span class="nv">MYVAR</span><span class="o">=</span>MyValue
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-filter">
+<span class="sig-name descname"><span class="pre">--filter</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;value&gt;</span> <span class="pre">[value2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-run-filter" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-run-f">
+<span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;value&gt;</span> <span class="pre">[value2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-run-f" title="Link to this definition">¶</a></dt>
+<dd><p>Filter which tests to run based on the name and location of the test. Wildcard values can pass into help match which test(s) to run.</p>
+<p><strong>Examples</strong>:</p>
+<p>Run all tests under the basic directory</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>--filter<span class="w"> </span>basic/*
+</pre></div>
+</div>
+<p>Run all test that end with http</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>--filter<span class="w"> </span>http
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-reporters">
+<span class="sig-name descname"><span class="pre">--reporters</span></span><span class="sig-prename descclassname"> <span class="pre">name</span> <span class="pre">[name2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-run-reporters" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-run-R">
+<span id="cmdoption-autest-run-arg-..."></span><span class="sig-name descname"><span class="pre">-R</span></span><span class="sig-prename descclassname"> <span class="pre">name</span> <span class="pre">[name2</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">...]</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-run-R" title="Link to this definition">¶</a></dt>
+<dd><p>Names of optional reporters to run as part of the report generation.
+(Currently there is only the default report generator, more will be added in the future)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-clean">
+<span class="sig-name descname"><span class="pre">--clean</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;level&gt;</span></span><a class="headerlink" href="#cmdoption-autest-run-clean" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-run-C">
+<span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;level&gt;</span></span><a class="headerlink" href="#cmdoption-autest-run-C" title="Link to this definition">¶</a></dt>
+<dd><p>Level of cleaning for after a test is finished. all &gt;
+exception &gt; failed &gt; warning &gt; passed &gt; skipped &gt;
+unknown&gt; none</p>
+<p><strong>Defaults</strong> “passed” - which will clean up all passed and skipped tests</p>
+<p><strong>Examples</strong>:</p>
+<p>Leave no files in the sandbox</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>--clean<span class="w"> </span>all
+</pre></div>
+</div>
+<p>Keep tests that passed. This is useful when creating a new test</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-C<span class="w"> </span>passed
+</pre></div>
+</div>
+<p>Keep all files in sandbox</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>autest<span class="w"> </span>-C<span class="w"> </span>none
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-run-normalize-kill">
+<span class="sig-name descname"><span class="pre">--normalize-kill</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;value&gt;</span></span><a class="headerlink" href="#cmdoption-autest-run-normalize-kill" title="Link to this definition">¶</a></dt>
+<dd><p>Normalizes the exit code when a process is given SIGKILL to an different value.
+Use this for cases in which the running the tests in an environment (such as certain docker setups)
+in which SIGINIT is blocked and AuTest is forced to kill the process instead.</p>
+</dd></dl>
+
+</section>
+<section id="list">
+<h3>list<a class="headerlink" href="#list" title="Link to this heading">¶</a></h3>
+<p>List information about test found by the system</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-list-json">
+<span class="sig-name descname"><span class="pre">--json</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-list-json" title="Link to this definition">¶</a></dt>
+<dd><p>output the information in json format</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-list-directory">
+<span class="sig-name descname"><span class="pre">--directory</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span></span><a class="headerlink" href="#cmdoption-autest-list-directory" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-list-D">
+<span class="sig-name descname"><span class="pre">-D</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span></span><a class="headerlink" href="#cmdoption-autest-list-D" title="Link to this definition">¶</a></dt>
+<dd><p>The directory to read the tests from.</p>
+<p><em>Default:</em> The current working directory.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-list-filter">
+<span class="sig-name descname"><span class="pre">--filter</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;value&gt;</span> <span class="pre">[value2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-list-filter" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-list-f">
+<span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;value&gt;</span> <span class="pre">[value2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-list-f" title="Link to this definition">¶</a></dt>
+<dd><p>Filter which tests to run based on the name and location of the test. Wildcard values can pass into help match which test(s) to run.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-list-env">
+<span class="sig-name descname"><span class="pre">--env</span></span><span class="sig-prename descclassname"> <span class="pre">var=value</span> <span class="pre">[key1=value1]</span></span><a class="headerlink" href="#cmdoption-autest-list-env" title="Link to this definition">¶</a></dt>
+<dd><p>Adds a custom variable to the Environment used for running the tests.
+More than one variable can be added.
+Each variable added will replace any existing values in the current shell environment.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-list-autest-site">
+<span class="sig-name descname"><span class="pre">--autest-site</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;path&gt;</span> <span class="pre">[path2</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-list-autest-site" title="Link to this definition">¶</a></dt>
+<dd><p>A user provided directory for extensions.
+Can be given more than one path. In this case all item will be loaded from both directories in the order of the path values provided.
+If provided the default location will not be used.</p>
+<p><em>Default</em>: to the <cite>autest-site</cite> directory under the path provided by the –directory options, i.e. <cite>./autest-site</cite></p>
+</dd></dl>
+
+</section>
+</section>
+<section id="general-options">
+<h2>General options<a class="headerlink" href="#general-options" title="Link to this heading">¶</a></h2>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-version" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-V">
+<span class="sig-name descname"><span class="pre">-V</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-V" title="Link to this definition">¶</a></dt>
+<dd><p>Prints the version of autest being used.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-help">
+<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-help" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-autest-h">
+<span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-h" title="Link to this definition">¶</a></dt>
+<dd><p>Print help text</p>
+</dd></dl>
+
+</section>
+<section id="console-options">
+<h2>Console options<a class="headerlink" href="#console-options" title="Link to this heading">¶</a></h2>
+<p>Options that affect console output</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-show-color">
+<span class="sig-name descname"><span class="pre">--show-color</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-show-color" title="Link to this definition">¶</a></dt>
+<dd><p>show color output &lt;default&gt;</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-disable-color">
+<span class="sig-name descname"><span class="pre">--disable-color</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-autest-disable-color" title="Link to this definition">¶</a></dt>
+<dd><p>disable color output</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-verbose">
+<span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"> <span class="pre">[category</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-verbose" title="Link to this definition">¶</a></dt>
+<dd><p>Print extra verbose messages about what the testing system is doing.
+If no argument is provided all messages will be reported.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-autest-debug">
+<span class="sig-name descname"><span class="pre">--debug</span></span><span class="sig-prename descclassname"> <span class="pre">[category</span> <span class="pre">...]</span></span><a class="headerlink" href="#cmdoption-autest-debug" title="Link to this definition">¶</a></dt>
+<dd><p>Print extra information that may help debug what the testing system is doing
+If no argument is provided all messages will be reported.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/general_design.html">General Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">User API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-options">General options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#console-options">Console options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../API/testers.html" title="previous chapter">Tester namespace</a></li>
+      <li>Next: <a href="../changelog.html" title="next chapter">Release Notes</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/usage/cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

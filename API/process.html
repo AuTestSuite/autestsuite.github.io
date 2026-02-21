@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Process &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Streams" href="streams.html" />
+    <link rel="prev" title="TestRun" href="testrun.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="process">
+<h1>Process<a class="headerlink" href="#process" title="Link to this heading">¶</a></h1>
+<p>Defines a system process that can run as part of the test.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testenities.process.Process">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Process</span></span><a class="headerlink" href="#autest.testenities.process.Process" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.ComposeVariables">
+<span class="sig-name descname"><span class="pre">ComposeVariables</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.process.Process.ComposeVariables" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of all variable with the parents,
+if any replaces with values of the children.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDict</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.EndAfter">
+<span class="sig-name descname"><span class="pre">EndAfter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lst</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.process.Process.EndAfter" title="Link to this definition">¶</a></dt>
+<dd><p>Helps control the order in which Processes should be shut down when the system
+has to stop the running processes.
+Useful when processes might have nanny processes that might restart other processes,
+or when certain state outputs are dependent on how processes are killed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lst</strong> – These are the Process object{s) to start before this Process object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.EndBefore">
+<span class="sig-name descname"><span class="pre">EndBefore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lst</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.process.Process.EndBefore" title="Link to this definition">¶</a></dt>
+<dd><p>Helps control the order in which Processes should be shut down when the system
+has to stop the running processes.
+Useful when processes might have nanny processes that might restart other processes,
+or when certain state outputs are dependent on how processes are killed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lst</strong> – These are the Process object{s) to start before this Process object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.StartAfter">
+<span class="sig-name descname"><span class="pre">StartAfter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lst</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.process.Process.StartAfter" title="Link to this definition">¶</a></dt>
+<dd><p>The same as StartBefore(), but in this case will start the provided
+processes after starting this process.
+See StartBefore() for details on arguments and examples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lst</strong> – These are the Process object{s) to start before this Process object.</p></li>
+<li><p><strong>ready</strong> – Named argument that can be provided to tell when the next process should start.
+The value can be a number, which will tell in second how long to wait.
+If the value is a function, the function needs to return True when the state is ready,
+and False when it is not.
+This function should do a quick test and not block the system from running.</p></li>
+<li><p><strong>args</strong> – Extra named arguments that will be pass to the ready function.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.StartBefore">
+<span class="sig-name descname"><span class="pre">StartBefore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lst</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.process.Process.StartBefore" title="Link to this definition">¶</a></dt>
+<dd><p>States that you want to start the provided Process object before the called object.
+The optional ready argument can be a number or function to tell when
+these objects should be ready before starting the next process.
+This is useful when certain states or time delays are needed before the next process can start.
+This function has to be added via named arguments.
+Likewise, arguments can be provided to the ready function via named arguments to help control behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lst</strong> – These are the Process object{s) to start before this Process object.</p></li>
+<li><p><strong>ready</strong> – Named argument that can be provided to tell when the next process should start.
+The value can be a number, which will tell in second how long to wait.
+If the value is a function, the function needs to return True when the state is ready,
+and False when it is not.
+This function should do a quick test and not block the system from running.</p></li>
+<li><p><strong>args</strong> – Extra named arguments that will be pass to the ready function.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<blockquote>
+<div><p>Simple start A before B with no delay</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">StartBefore</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simple start A before B with 1.5 second delay by setting ready logic</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="n">A</span><span class="o">.</span><span class="n">ready</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="n">B</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="o">..</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">StartBefore</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simple start A before B with 1.5 second delay via setting it on the StartBefore</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">StartBefore</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">ready</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simple start A and A1 before B with custom function via setting it on the StartBefore</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">custom_delay</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">size</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+
+<span class="n">A</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="n">A1</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+
+<span class="n">B</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">B</span><span class="o">.</span><span class="n">StartBefore</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="n">ready</span><span class="o">=</span><span class="n">custom_delay</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;startup.log&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.CleanupEvent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">CleanupEvent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Event</span></span><a class="headerlink" href="#autest.testenities.process.Process.CleanupEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Called to do any cleanup actions</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.Command">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#autest.testenities.process.Process.Command" title="Link to this definition">¶</a></dt>
+<dd><p>The command used to start the process</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.DelayStart">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DelayStart</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#autest.testenities.process.Process.DelayStart" title="Link to this definition">¶</a></dt>
+<dd><p>Defines a number of seconds to delay the start of the object after it has become ready to start.
+This allows a different way to delay starting a Process or TestRun.
+Useful as a way to effectively “sleep” for a time period before the process or a TestRun starts</p>
+<p class="rubric">Example</p>
+<p>Sets a delay in the of 2.5 second for a process to reload data</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s2">&quot;server&quot;</span><span class="p">,</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;…&quot;</span><span class="p">)</span>
+<span class="n">Tr1</span><span class="o">=</span><span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+
+<span class="c1"># set some value for the server, Server takes at least two second to</span>
+<span class="c1"># reload data</span>
+<span class="n">Tr1</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">=</span><span class="s2">&quot;server_cfg -set value=2&quot;</span>
+<span class="n">Tr1</span><span class="o">.</span><span class="n">StartBefore</span><span class="p">(</span><span class="n">Test</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">server</span><span class="p">)</span>
+
+<span class="c1"># test that the value was loaded</span>
+<span class="n">Tr2</span><span class="o">=</span><span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+
+<span class="c1"># delay little over two second to give server time to load data</span>
+<span class="n">Tr1</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">DelayStart</span><span class="o">=</span><span class="mf">2.5</span>
+<span class="n">Tr1</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">=</span><span class="s2">&quot;server_cfg -get value&quot;</span>
+<span class="n">Tr1</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Streams</span><span class="o">..</span><span class="n">stdout</span><span class="o">.</span><span class="n">Content</span><span class="o">=</span><span class="n">testers</span><span class="o">.</span><span class="n">ContainsExpression</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;test that value = 2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sets a delay in the of 2.5 second for a TestRun to allow steps from the
+previous TestRun time to go through the system</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="n">tr</span><span class="o">.</span><span class="n">DelayStart</span><span class="o">=</span><span class="mi">5</span> <span class="c1"># delay 5 seconds before start the test run</span>
+<span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Command</span> <span class="o">=</span> <span class="s1">&#39;python diff.py&#39;</span>
+<span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">ReturnCode</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.Env">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Env</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">StringDict</span></span><a class="headerlink" href="#autest.testenities.process.Process.Env" title="Link to this definition">¶</a></dt>
+<dd><p>The shell environment used for running commands.
+Returns a dictionary type object.
+Items are in the dictionary are only the those set at the current scope.
+This mean a variable set of the Test object will not be seen at the TestRun object.
+To get a fully composed set of values including those of parent TestRun
+or Test object call the ComposeEnv() API.
+Values set at a lower scope override values defined in a parent scope.</p>
+<p class="rubric">Example</p>
+<p>use a special feature for the test</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">Env</span><span class="p">[</span><span class="s2">&quot;USE_MY_FEATURE1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.FinishedEvent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">FinishedEvent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Event</span></span><a class="headerlink" href="#autest.testenities.process.Process.FinishedEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Called after the logic of the runnable has finished</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.ForceUseShell">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ForceUseShell</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></span><a class="headerlink" href="#autest.testenities.process.Process.ForceUseShell" title="Link to this definition">¶</a></dt>
+<dd><p>Forces the use of a shell when running the command.
+Normally AuTest will try to detect if there shell related commands or syntax in the command
+and will only spawn a shell in those cases.
+However in certain cases it fails to get this correct and need to be explicitly told to use the shell</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.Name">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#autest.testenities.process.Process.Name" title="Link to this definition">¶</a></dt>
+<dd><p>The name or ID of the process</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter<span class="colon">:</span></dt>
+<dd class="field-odd"><p>returns the name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.Ready">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Ready</span></span><a class="headerlink" href="#autest.testenities.process.Process.Ready" title="Link to this definition">¶</a></dt>
+<dd><p>Option number or function that defines when the Process is considered to be ready.
+To be ready means that we can start another process that should start after this process.
+If the value is a number, it will be used as a number of seconds to wait before starting the process.
+Otherwise this is normally a function defined in the When space.</p>
+<p>This is exist on TestRun and Test objects however at the moment is does not have any affect.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.RunDirectory">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">RunDirectory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#autest.testenities.process.Process.RunDirectory" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the directory this test will run in.
+This maps to a directory under the sandbox root directory.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.RunningEvent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">RunningEvent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Event</span></span><a class="headerlink" href="#autest.testenities.process.Process.RunningEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Called every .1 of second while the runnable logic is executing</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.Setup">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Setup</span></span><a class="headerlink" href="#autest.testenities.process.Process.Setup" title="Link to this definition">¶</a></dt>
+<dd><p>The setup object for this given process.
+See Setup for more information.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.SetupEvent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">SetupEvent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Event</span></span><a class="headerlink" href="#autest.testenities.process.Process.SetupEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Called to do any setup logic</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.StartedEvent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">StartedEvent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Event</span></span><a class="headerlink" href="#autest.testenities.process.Process.StartedEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Called after the main logic has started</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.StartingEvent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">StartingEvent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Event</span></span><a class="headerlink" href="#autest.testenities.process.Process.StartingEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Called before we start the main logic of the runnable.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.StartupTimeout">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">StartupTimeout</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#autest.testenities.process.Process.StartupTimeout" title="Link to this definition">¶</a></dt>
+<dd><p>This is the value of how long AuTest will wait for the given process to start
+and be considered ready before it will stop the process and report an error.
+Set this value to allow for more or less time.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.StreamOutputDirectory">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">StreamOutputDirectory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#autest.testenities.process.Process.StreamOutputDirectory" title="Link to this definition">¶</a></dt>
+<dd><p>The path to the where all stream files will be written to</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.TestDirectory">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TestDirectory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#autest.testenities.process.Process.TestDirectory" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the directory where the test file exists</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.TestFile">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TestFile</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#autest.testenities.process.Process.TestFile" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the name of the test file that defines this test</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.TestRoot">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TestRoot</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#autest.testenities.process.Process.TestRoot" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the root directory in which autest start scanning for tests</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="autest.testenities.process.Process.Variables">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Variables</span></span><a class="headerlink" href="#autest.testenities.process.Process.Variables" title="Link to this definition">¶</a></dt>
+<dd><p>Defines a special Variables object that allows for the dynamic setting of new values.
+Allows for setting of state to be shared for defining tests.
+Values are shared and can be overridden on child objects.</p>
+<p>Example:</p>
+<p>Define a new variable for Port value</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">Variables</span><span class="o">.</span><span class="n">Port</span> <span class="o">=</span> <span class="mi">8080</span>
+
+<span class="n">tr</span><span class="o">=</span><span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">=</span><span class="s2">&quot;curl localhost:</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">Variables</span><span class="o">.</span><span class="n">Port</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<section id="testable-properties">
+<h2>Testable properties:<a class="headerlink" href="#testable-properties" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/general_design.html">General Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="main.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testrun.html">TestRun</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="streams.html">Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk.html">Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory.html">Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conditions.html">Condition Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="when.html">When namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testers.html">Tester namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="main.html">User API</a><ul>
+      <li>Previous: <a href="testrun.html" title="previous chapter">TestRun</a></li>
+      <li>Next: <a href="streams.html" title="next chapter">Streams</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/API/process.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Setup &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Processes" href="processes.html" />
+    <link rel="prev" title="Streams" href="streams.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h1>
+<p>This general object all defining a set of action to happen in the Setup and Cleanup events.
+Use to define actions that need to happen before the object starts.
+All actions happen within the sandbox or environment defined for the test.
+New methods can be added to main Setup object via the <strong>AddSetupItem</strong> API.
+The setup object contains a number of sub-objects that act like domain namespaces to help
+separate commonly name actions that might exist in different areas.
+For example, different version control tools may have commonly named actions.
+These items will be listed below in the form of <strong>&lt;namespace&gt;.&lt;method&gt;</strong> to help clarify grouping.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Copy.FromDirectory">
+<span class="sig-prename descclassname"><span class="pre">Copy.</span></span><span class="sig-name descname"><span class="pre">FromDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Copy.FromDirectory" title="Link to this definition">¶</a></dt>
+<dd><p>This method copies items from a given directory to test sandbox directory.
+All paths are relative from the Test.TestRoot directory,
+unless if the path provided is an absolute path.
+The same as saying:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">Test</span><span class="o">.</span><span class="n">TestRoot</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this function to help provide clarity and intent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to copy</p>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>Copy all items for directory to be the content of a test.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="o">.</span><span class="n">FromDirectory</span><span class="p">(</span><span class="s2">&quot;example/case1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Copy.FromTemplate">
+<span class="sig-prename descclassname"><span class="pre">Copy.</span></span><span class="sig-name descname"><span class="pre">FromTemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Copy.FromTemplate" title="Link to this definition">¶</a></dt>
+<dd><p>This method copies data from a directory under the template directory under the Test.TestRoot directory.
+The same as saying:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Test</span><span class="o">.</span><span class="n">TestRoot</span><span class="p">,</span><span class="s2">&quot;templates&quot;</span><span class="p">,</span><span class="nb">dir</span><span class="p">),</span> <span class="n">Test</span><span class="o">.</span><span class="n">TestRoot</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this function to help provide clarity and intent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to copy</p>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>Copies a directory “case1” under the the test root/templates to be the contents of the sandbox</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="o">.</span><span class="n">FromTemplate</span><span class="p">(</span><span class="s2">&quot;case1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Copy">
+<span class="sig-name descname"><span class="pre">Copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Copy" title="Link to this definition">¶</a></dt>
+<dd><p>This method copies a file or directory to a location under the Sandbox location for the test.
+This is the core function used to by FromTemplate() or FromDirectory().
+The optional target argument can be used to rename the item,
+or to copy the item to a different subdirectory under the sandbox directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Path to copy</p></li>
+<li><p><strong>target</strong> (<em>str</em>) – Path to copy</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples</strong></p>
+<p>Copy a contents of directory to be in the root of the sandbox.
+Using <strong>Setup.FromDirectory(“mytestcase”)</strong> may be more clear.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="s2">&quot;mytestcase&quot;</span><span class="p">,</span> <span class="n">Test</span><span class="o">.</span><span class="n">TestRoot</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copy the same directory into the sandbox.
+This create a subdirectory “testit” in the sandbox</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="s2">&quot;mytestcase&quot;</span><span class="p">,</span> <span class="s2">&quot;testit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copy a file “a.txt” in to the sandbox.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">Copy</span><span class="p">(</span><span class="s2">&quot;a.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CopyAs">
+<span class="sig-name descname"><span class="pre">CopyAs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CopyAs" title="Link to this definition">¶</a></dt>
+<dd><p>Will copy the item to the new locations.
+Differs from Copy as the target argument is always viewed as a directory.
+Use this function over the copy function to avoid system behaviors where that target maybe be viewed as a file or directory depending on if the existence of the target on disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – Path to copy</p></li>
+<li><p><strong>target</strong> (<em>str</em>) – Directory to copy to. If set to None will be the sandbox directory</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – name to rename item to under the ToPath</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>This will copy a file to the root sandbox directory</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">CopyAs</span><span class="p">(</span><span class="s2">&quot;a.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will copy a file to the root sandbox directory and rename the file a1.txt</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">CopyAs</span><span class="p">(</span><span class="s1">&#39;a.txt&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;a1.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will copy a file to the directory sub1/sub2 and rename the file as a1.txt</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">CopyAs</span><span class="p">(</span><span class="s2">&quot;a.txt&quot;</span><span class="p">,</span><span class="s1">&#39;sub1/sub2&#39;</span><span class="p">,</span> <span class="s1">&#39;a1.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MakeDir">
+<span class="sig-name descname"><span class="pre">MakeDir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MakeDir" title="Link to this definition">¶</a></dt>
+<dd><p>Will create the path provided inside the sandbox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – The directory to create</p></li>
+<li><p><strong>mode</strong> (<em>int</em>) – Optional file mode to set the directory to.
+Ignored on systems that don’t support this.
+This is system dependent, however on POSIX based system this defaults to 0777 (octal format)</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>TBD</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Chown">
+<span class="sig-name descname"><span class="pre">Chown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Chown" title="Link to this definition">¶</a></dt>
+<dd><p>Change owner and group is of the item in provided path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – The path to the item to change</p></li>
+<li><p><strong>uid</strong> (<em>str</em>) – The user id</p></li>
+<li><p><strong>gid</strong> (<em>std</em>) – The group id</p></li>
+<li><p><strong>ignore</strong> (<em>bool</em>) – If the value cannot be change, ignore this as an error.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>TBD</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Lambda">
+<span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Lambda" title="Link to this definition">¶</a></dt>
+<dd><p>A quick and dirty way to do some custom action during setup</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – The function to call. Needs to</p></li>
+<li><p><strong>description</strong> – Text to use in the report to describe to the user what the intent step is.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>TBD</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Setup.Svn.CreateRepository">
+<span class="sig-prename descclassname"><span class="pre">Setup.Svn.</span></span><span class="sig-name descname"><span class="pre">CreateRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Setup.Svn.CreateRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Create a repository within a directory with the value of “name”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Setup.Svn.ImportDirectory">
+<span class="sig-prename descclassname"><span class="pre">Setup.Svn.</span></span><span class="sig-name descname"><span class="pre">ImportDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_to_add</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Setup.Svn.ImportDirectory" title="Link to this definition">¶</a></dt>
+<dd><p>Import data to the named SVN repo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the SVN to import to.
+Should be the same value used by CreateRepository()</p></li>
+<li><p><strong>dir_to_add</strong> (<em>str</em>) – The directory to import into the repository.</p></li>
+<li><p><strong>sub_dir</strong> (<em>str</em>) – A subdirectory under the repository to import data to, for example, “truck”, or “branch”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Setup.Git.CreateRepository">
+<span class="sig-prename descclassname"><span class="pre">Setup.Git.</span></span><span class="sig-name descname"><span class="pre">CreateRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Setup.Git.CreateRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Create a Git repository within a directory with the value of “name”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the Git repo to create.
+This will be the name of the directory created under the sandbox directory.</p>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>This will create a repo under the sandbox directory called “myrepo”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">CreateRepository</span><span class="p">(</span><span class="s2">&quot;myrepo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Setup.Git.ImportDirectory">
+<span class="sig-prename descclassname"><span class="pre">Setup.Git.</span></span><span class="sig-name descname"><span class="pre">ImportDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_to_add</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Setup.Git.ImportDirectory" title="Link to this definition">¶</a></dt>
+<dd><p>Import data to the named Git repo. The repo has to be created first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the Git repo to import to.
+Should be the same value used by CreateRepository()</p></li>
+<li><p><strong>dir_to_add</strong> (<em>str</em>) – The directory to import into the repository.</p></li>
+<li><p><strong>sub_dir</strong> (<em>str</em>) – A subdirectory under the repository to import data to</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example</strong></p>
+<p>This will import all files in a give directory to the root of the Git repo name “myrepo”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">ImportDirectory</span><span class="p">(</span><span class="s2">&quot;myrepo&quot;</span><span class="p">,</span> <span class="s2">&quot;mydir&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will import all files in a give directory to the subdirectory “truck” of the Git repo name “myrepo”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Setup</span><span class="o">.</span><span class="n">ImportDirectory</span><span class="p">(</span><span class="s2">&quot;myrepo&quot;</span><span class="p">,</span> <span class="s2">&quot;mydir&quot;</span><span class="p">,</span> <span class="s2">&quot;truck&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/general_design.html">General Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="main.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testrun.html">TestRun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="streams.html">Streams</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk.html">Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory.html">Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conditions.html">Condition Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="when.html">When namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testers.html">Tester namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="main.html">User API</a><ul>
+      <li>Previous: <a href="streams.html" title="previous chapter">Streams</a></li>
+      <li>Next: <a href="processes.html" title="next chapter">Processes</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/API/setup.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Objects for Defining Tests &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="User API" href="../API/main.html" />
+    <link rel="prev" title="General Design" href="general_design.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="objects-for-defining-tests">
+<h1>Objects for Defining Tests<a class="headerlink" href="#objects-for-defining-tests" title="Link to this heading">¶</a></h1>
+<p>There are a few objects to allow the defining of tests. While technically a test file is Python, the design is to maybe allow for different test file formats in the future, as such, the objects are inserted into the test files namespace when it is loaded. This mean you generally only don’t need to import python modules to test file. The core objects you need should just exist. You still may want to import other modules to help with another task not handled by the provided built-in objects, or by the extension loaded by the system. Object are defined globally or require calling some function to create an instance of it.</p>
+<section id="global-objects">
+<h2>Global objects<a class="headerlink" href="#global-objects" title="Link to this heading">¶</a></h2>
+<p>These objects or namespaces define singleton objects for a test or a group of functions or objects to address a certain need. A summary of the objects or namespaces that are defined globally are:</p>
+<p><strong>Test</strong>
+– this is the main object for defining a test. There is only one test per file.
+A test consist of one or more steps referred to as TestRun.</p>
+<p><strong>Setup</strong>
+– Setup allows the user to define logic for to run before it starts running the first test. It is the same object you can access via Test.Setup.</p>
+<p><strong>Conditions</strong>
+– is a namespace with a number of function that can be called to test if a test can run or not</p>
+<p><strong>Testers</strong>
+– is a namespace of the test object that can be used to define more complex test cases. For example, a user can define that a return code should be less than 5 vs the default is equal to a value.</p>
+<p><strong>When</strong>
+– is a namespace that defines a number of function that can be used to tell when a process is considered ready. This is used when starting multiple processes for a test run and some logic needs to be defined when the next process should be started. For example, a test might be running a curl command through some server. Using a PortOpen function would allow the testing system a way to now when it is ok to run the curl command, giving the server time enough to correct startup.</p>
+<p>Most of these objects or namespaces have a way to extend or add function globally via adding a file under the autest-site directory. More details can be found under
+<strong>Extending AuTest</strong>
+section.</p>
+</section>
+<section id="local-objects">
+<h2>Local objects<a class="headerlink" href="#local-objects" title="Link to this heading">¶</a></h2>
+<p>These objects created by calling some function to create an instance of it or they are considered a member of an instance of a created object. These object generally define some testable entities, such as a process, file on disk, or a step of the test to run. Given these are testable there as a number of testable properties defined that can be set to some logic to verify some state. A summary of the objects that are defined by the system are:</p>
+<p><strong>Disk</strong>
+– Defines concept of disk entities. Used to create and hold entities in a file system.</p>
+<p><strong>Directory</strong>
+– defines a directory entity on disk. These are created by the Disk object</p>
+<p><strong>File</strong>
+– Defines a file entity on disk. This can be extended to allow the create of different file types that have extra properties, testable properties or functionality, such as writing out data in a certain format given custom data inputs. These are created by the Disk object</p>
+<p><strong>Processes</strong>
+– Defines the set of processes we want to run. Used to create and hold process entities</p>
+<p><strong>Process</strong>
+– Defines process entities to run. These are created Processes object.</p>
+<p><strong>Streams</strong>
+– Defines output streams such as stdout. This object is considered a member of the Process object.</p>
+<p><strong>TestRun</strong>
+– Defines a step to run in the test. Created by the global Test object.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_design.html">General Design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Objects for Defining Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#global-objects">Global objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#local-objects">Local objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="general_design.html" title="previous chapter">General Design</a></li>
+      <li>Next: <a href="../API/main.html" title="next chapter">User API</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/basics/core_items.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

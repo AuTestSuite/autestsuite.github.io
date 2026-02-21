@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Disk &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Directory" href="directory.html" />
+    <link rel="prev" title="Processes" href="processes.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="disk">
+<h1>Disk<a class="headerlink" href="#disk" title="Link to this heading">¶</a></h1>
+<p>Allows definition of disk entities,
+such as Directories and File Objects to be tested as part of the defining scope.
+It also store a reference of the object for later access.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testenities.disk.Disk">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Disk</span></span><a class="headerlink" href="#autest.testenities.disk.Disk" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.disk.Disk.Directory">
+<span class="sig-name descname"><span class="pre">Directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.disk.Disk.Directory" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new Directory object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The path to the file. This is relative to the runtime state.</p></li>
+<li><p><strong>exists</strong> – Can be set to True to test that the file exists or False to test that it does not exist
+Can be set to a tester object for a custom test</p></li>
+<li><p><strong>id</strong> – a custom value that can be used to refer to the file as part of the Disk object later in the test file</p></li>
+<li><p><strong>runtime</strong> – Can be normally ignored.
+By default this is True which mean the relative path is based on the current sandbox/runtime path is the root.
+If False the relative path is based on the current location of the test file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="autest.testenities.disk.Disk.File">
+<span class="sig-name descname"><span class="pre">File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">execute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testenities.disk.Disk.File" title="Link to this definition">¶</a></dt>
+<dd><p>Creates a new File object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The path to the file. This is relative to the runtime state.</p></li>
+<li><p><strong>exists</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]</span>) – Can be set to True to test that the file exists or False to test that it does not exist
+Can be set to a tester object for a custom test.</p></li>
+<li><p><strong>size</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – Can be set a integer value greater or equal to 0 to test that file matches the exact size.
+Can be set to a tester object for a custom test.</p></li>
+<li><p><strong>execute</strong> – currently ignored</p></li>
+<li><p><strong>id</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – A custom value that can be used to refer to the file as part of the Disk object later in the test file.</p></li>
+<li><p><strong>runtime</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Can be normally ignored.
+By default this is True which mean the relative path is based on the current sandbox/runtime path is the root.
+If False the relative path is based on the current location of the test file.</p></li>
+<li><p><strong>typename</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Control if the file should be of a certain type.
+This allows creation of File objects that might have extended functionality such as reading and
+writing json files via a dictionary interface.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Items that are created can be given an <strong>id</strong> argument which will be used to when making the new
+entity a member of the Disk object.</p>
+<p><strong>Example</strong></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;foo.txt&quot;</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">foo</span><span class="o">.</span><span class="n">Exists</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Likewise all item can be accessed can be accesses via a read only dictionary interface.
+This allow accessing entities that do not have language friendly names.</p>
+<p><strong>Example</strong></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;dir/foo.txt&quot;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">Disk</span><span class="p">[</span><span class="s2">&quot;dir/foo.txt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">Exists</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/general_design.html">General Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="main.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testrun.html">TestRun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="streams.html">Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory.html">Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conditions.html">Condition Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="when.html">When namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testers.html">Tester namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="main.html">User API</a><ul>
+      <li>Previous: <a href="processes.html" title="previous chapter">Processes</a></li>
+      <li>Next: <a href="directory.html" title="next chapter">Directory</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/API/disk.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

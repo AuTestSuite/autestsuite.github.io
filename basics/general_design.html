@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>General Design &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Objects for Defining Tests" href="core_items.html" />
+    <link rel="prev" title="Introduction" href="../overview/introduction.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="general-design">
+<h1>General Design<a class="headerlink" href="#general-design" title="Link to this heading">¶</a></h1>
+<section id="what-makes-up-a-test">
+<h2>What makes up a test<a class="headerlink" href="#what-makes-up-a-test" title="Link to this heading">¶</a></h2>
+<p>The basics of defining a test are creating a text file that ends with “.test” or “.test.py”.
+This file should be added under a root directory that should hold all defined tests.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using directories to help organize tests in to related groups to maintaining a large number of tests.</p>
+</div>
+<p>Inside the file the user can define:</p>
+<ul class="simple">
+<li><p>A set of conditions, to control if the test should run or not on the given platform.</p></li>
+<li><p>One or more test steps referred to as test runs, that will define one default process to run and a number of items to test various state for.</p></li>
+<li><p>Set up actions to copy or do other actions, such as copy files, needed to setup the test to run correctly. The Test and each TestRun and Process defined can have its own setup logic.</p></li>
+<li><p>extra File or Directory items that are needed as part of the test to allow testing of content or state.</p></li>
+</ul>
+<p>The name of the test is the file name minus the extension.
+The subdirectories can be used to help refer a given test or a set of tests.</p>
+<p>A test or verification of state are defined via setting various testable properties of an object to a value or a custom Testable object.
+In Autest test will normally continue to run and all failed states will reported at the end.
+A given testable property such as <cite>ReturnCode</cite> on a <cite>Process</cite> object have a default tester associated with it
+( in this case Equal) that can take a default value (In this case a number).
+A give testable property can be given one or more states to test for via using = or += operator or certain composable tester object.
+It is important to understand that for the most part, minus local python variable ordering or default creation of TestRun objects, the order in which items are defined in a test file does not matter.
+The test file defines context of what needs to happen.
+Autest itself will process this and run the items in the correct order.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to understand that the tests are done not done via direct asserts,
+but via setting some state to check for on a property of the Testable object that is normally mapped to some testable property of an object or via an event.
+This is different from many testing systems that are based on running serial code until an assert stop execution of the test.</p>
+</div>
+</section>
+<section id="objects-for-defining-tests">
+<h2>Objects for Defining Tests<a class="headerlink" href="#objects-for-defining-tests" title="Link to this heading">¶</a></h2>
+<p>There are a few objects to allow the defining of tests.
+While technically a test file is Python, the design is to maybe allow for different test file formats in the future
+because of this to help with ease of use and future compatibility shims that maybe needed,
+the objects are inserted into the test files namespace when it is loaded.
+This mean you generally only don’t need to import python modules into the test file.
+The core objects you need should just exist.
+You still may want to import other modules to help with custom logic not handled by the provided built-in objects.</p>
+<section id="global-objects-types">
+<h3>Global objects types<a class="headerlink" href="#global-objects-types" title="Link to this heading">¶</a></h3>
+<p>AuTest defines a few global objects to help define any given test.
+A summary of the objects or namespaces that are defined globally are:</p>
+<p><strong>Test</strong>
+– This is the main object for defining a test.
+The Test object is defined as a singleton as there is only one test per file.
+A test consist of one or more steps referred to as TestRun.</p>
+<p><strong>Setup</strong>
+– The Setup object allows the user to define logic to run before it starts running the first TestRun.
+This logic can be extended by the user to add custom checks that are not builtin to the system.
+It is the same object you can access via <cite>Test.Setup</cite>.
+There is also a Setup object that is defined as member of the TestRun and Process objects.</p>
+<p><strong>Conditions</strong>
+– A namespace with a number of builtin or user define extension functions that can be
+called to test for various states to control if some or all of a test should run or be skipped.</p>
+<p><strong>Testers</strong>
+– A namespace of the built and user defined objects that can be used to define various test cases.</p>
+<p><strong>When</strong>
+– A namespace that defines a number of functions that can be used to tell when a Process is considered ready.
+This is used when starting multiple processes for a given TestRun to make sure enough delay happens before starting dependent processes.
+For example, a test might be running a curl command through some server.
+Using a <cite>When.PortOpen</cite> function would allow the testing system a way to know the server is loaded and listening
+allowing autest to know is ok to run the curl command.</p>
+<p>Most of these objects or namespaces have a way to extend or add function globally via adding a file under the autest-site directory.
+More details can be found under
+<strong>Extending AuTest</strong>
+section.</p>
+</section>
+<section id="local-objects-types">
+<h3>Local objects types<a class="headerlink" href="#local-objects-types" title="Link to this heading">¶</a></h3>
+<p>There are a number of object type that will be used when defining a test.
+These object are created via factory functions or are members of existing objects.
+Most these object contain various testable properties that can be assigned values to enable testing of some state
+Understanding these core object will make it easier to understand how a test is defined.</p>
+<p>A summary of the objects that are defined by the system are:</p>
+<p><strong>Disk</strong>
+– Is a container and factory object of all disk entities define in the test.
+It is a member of the Test, TestRun and Process objects.
+Defining a disk entity at one of these level controls when that Entity will be tested.
+This also allows a common entity can be defined multiple times in different Disk objects.
+This allows as an example, different TestRun object to test different states of a file as a test progresses.
+The Disk object itself does not define any testable properties.
+New entities defined by a given Disk object become members of the Disk object for later access.</p>
+<p><strong>Directory</strong>
+– Defines a directory entity on disk.
+These are created by the Disk object.</p>
+<p><strong>Env</strong>
+- Defines the environment a Process will run under.
+It can be viewed as a Dictionary.
+Extensions can add default values.
+It is a member of the Test, TestRun and Process objects.
+The results of the Environment are composed before a process runs allowing values in define in Process to override value in a TestRun which can override values define in a Test object.</p>
+<p><strong>File</strong>
+– Defines a file entity on disk.
+File objects can extended to allow the create of different types that have extra properties, testable properties or functionality,
+such as writing out data YAML and allowing setting of items in the file as a directory vs a string.
+These are created by the Disk object</p>
+<p><strong>Processes</strong>
+– Is a container and factory object of all processes we want to run.
+It is a member of the Test, and TestRun objects.
+The Processes object itself does not define any testable properties.
+New process defines by a given Processes object become members of the Processes object for later access.</p>
+<p><strong>Process</strong>
+– Defines process entities to run.
+Processes can be extended.
+These are created Processes object.</p>
+<p><strong>Streams</strong>
+– Defines output streams such as stdout.
+This object is considered a member of the Process object.</p>
+<p><strong>TestRun</strong>
+– Defines a step to run in the test.
+Created by the global Test object.
+The order in which the TestRun objects are created define the order in which they run in the Test.
+TestRun objects can be extended.</p>
+<p><strong>Variables</strong>
+- Defines a set variable that can be used to control how tests run.
+It can be viewed as a Dictionary, however has the ability to be nested.
+Extensions can add default values.
+It is a member of the Test, TestRun and Process objects.
+The results of the Variables are can be composed allowing values in define in Process to override value in a TestRun which can override values define in a Test object.</p>
+</section>
+</section>
+<section id="how-this-connects">
+<h2>How this connects<a class="headerlink" href="#how-this-connects" title="Link to this heading">¶</a></h2>
+<p>The general design of the system is based on creating objects that defines events and testable states.
+In AuTest these object is referred as a runnable object.
+AuTest defines three runnable based objects. These are:</p>
+<ul class="simple">
+<li><p>Test – which defines the test as a whole.</p></li>
+<li><p>TestRun – which defines a step of the test.</p></li>
+<li><p>Process – which defines a process that is run as part of the test or a given step</p></li>
+</ul>
+<p>The Runnable object defines:</p>
+<ul class="simple">
+<li><p>Common set of events</p>
+<ol class="arabic simple">
+<li><p>Setup – called to do any setup logic</p></li>
+<li><p>Starting – called before we start the main logic of the runnable</p></li>
+<li><p>Started – called after the main logic has started</p></li>
+<li><p>Running – is called every .1 of second while the runnable logic is executing</p></li>
+<li><p>Finished – called after the logic of the runnable has finished</p></li>
+<li><p>Cleanup – called to do any cleanup actions</p></li>
+</ol>
+</li>
+<li><p>A shell environment of variables to be used to run any processes under it</p></li>
+<li><p>Variables object to define custom values to help provide information or control the test logic</p></li>
+</ul>
+<p>Custom logic is added via an extension API to provide common functionality to the different core object used to define tests.
+This allows, for example, a Test object to define an API to create custom processes while not allow the TestRun object to have the same API defined.
+This provides a level of scope and context of when an object is tested for the state.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The concept of <strong>Scopes</strong> is key to understand when and what gets tested at a given point in time.
+A Scope is any runnable object, which are currently the Test, TestRun and Process objects, that define common set of events.</p>
+<p>For example, a File object defined at a Test scope will have the contents tested when the Test <cite>Finished</cite> event happens.
+Defining a File object at a Process scope will have it the content test happen when the process <cite>Finished</cite> event happens as the test is running.</p>
+</div>
+</section>
+<section id="running-the-tests">
+<h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Link to this heading">¶</a></h2>
+<p>When running the test program “autest” results in these steps:</p>
+<ol class="arabic simple">
+<li><p>Load any extensions.</p></li>
+<li><p>Recursively scans a directory for tests to run.</p></li>
+<li><dl class="simple">
+<dt>For each test found:</dt><dd><ol class="arabic simple">
+<li><p>Read the test data.</p></li>
+<li><p>Define objects describing the test.</p></li>
+<li><p>Setup and Run the test in the sandbox location.</p></li>
+<li><p>Collect any result about the test.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Report out the results via the default or user-provided reporter objects.</p></li>
+</ol>
+<p>Various options and features exist to help control the running test.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">General Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-makes-up-a-test">What makes up a test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objects-for-defining-tests">Objects for Defining Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-this-connects">How this connects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-tests">Running the tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">User API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../overview/introduction.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="core_items.html" title="next chapter">Objects for Defining Tests</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/basics/general_design.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

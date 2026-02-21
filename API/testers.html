@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tester namespace &#8212; AuTest 1.4.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9172181d"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command Line options" href="../usage/cli.html" />
+    <link rel="prev" title="When namespace" href="when.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tester-namespace">
+<h1>Tester namespace<a class="headerlink" href="#tester-namespace" title="Link to this heading">¶</a></h1>
+<p>This namespace provided a number of object predefined testing object to help define a given type of test.
+Custom test object can be defined by the user inline of a given test for via the extension API.
+It is recommend if a custom test is to be used by for than one test that it should be provided via
+the extension API to avoid maintaining issue with keeping multiple copies in sync.</p>
+<p>Most testing properties of provide a default tester object that will accept a raw value such as a string or number.
+however it common to want to provide a different type of test or a more complex test set.
+Using the objects in the tester namespace can make it easy to customize or compose the needed logic</p>
+<section id="logical-test">
+<h2>Logical Test<a class="headerlink" href="#logical-test" title="Link to this heading">¶</a></h2>
+<p>These provide the common equal, less than, etc logic that are needed for basic value testing.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.equal.Equal">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.equal.Equal" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the value is equal to the expected value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.not_equal.NotEqual">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotEqual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.not_equal.NotEqual" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the value does not match the expected value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
+<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</span>) – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.less_than.LessThan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">LessThan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.less_than.LessThan" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the value is less than the expected value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.less_equal.LessEqual">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">LessEqual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.less_equal.LessEqual" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the value is less than or equal to the expected value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing item in the event
+queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context, should be
+in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.greater_than.GreaterThan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">GreaterThan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.greater_than.GreaterThan" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the value is greater than the expected value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing item
+in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.greater_equal.GreaterEqual">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">GreaterEqual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.greater_equal.GreaterEqual" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the value is greater than or equal to the expected value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="content-test">
+<h2>Content Test<a class="headerlink" href="#content-test" title="Link to this heading">¶</a></h2>
+<p>These provide easy way to test the content of a file or text stream.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.contains_expression.ContainsExpression">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ContainsExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regexp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killOnFailure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reflags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.contains_expression.ContainsExpression" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the content contains the provided expression.</p>
+<p>If re.M is provided as part of the reflags argument the whole string will be tested with re.search.
+If re.M is not provided the content will be broken up into separate line and the expression is tested
+on each line with re.search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regexp</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The expression to test for</p></li>
+<li><p><strong>reflags</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Optional set of re flags to control behavior of the expression.</p></li>
+<li><p><strong>kill_on_failure</strong> – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.excludes_expression.ExcludesExpression">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ExcludesExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regexp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killOnFailure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reflags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.excludes_expression.ExcludesExpression" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the content does not contain the provided expression.</p>
+<p>If re.M is provided as part of the reflags argument the whole string will be tested with re.search.
+If re.M is not provided the content will be broken up into separate line and the expression is tested
+on each line with re.search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regexp</strong> – The expression to test for.</p></li>
+<li><p><strong>reflags</strong> – Optional set of re flags to control behavior of the expression.</p></li>
+<li><p><strong>kill_on_failure</strong> – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’.</p></li>
+<li><p><strong>description</strong> – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.gold_file.GoldFile">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">GoldFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goldfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_eol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_insensitive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.gold_file.GoldFile" title="Link to this definition">¶</a></dt>
+<dd><p>Tests if a file matches expected results via comparing a file or stream output with the content of the gold file.
+The gold file can contain wild card statement of <cite>{}</cite> or <cite>``</cite> to tell the testing logic that differences
+in the area are to be ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>goldfile</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the gold file to be used for the test. Assumed to relative to the location of the test file.</p></li>
+<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing item
+in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>normalize_eol</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If True will normalize the <cite>\\r\\n</cite> sequences to <cite>\\n</cite> to help with common differences between different
+operating system such as Unix or Windows systems. If False no normalizing will happen.</p></li>
+<li><p><strong>case_insensitive</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If True, the content of both the gold file and the stream will be compared case-insensitively. If False,
+gold comparison will be case-sensitive.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Test a gold file with new normalization of new line of /r/n to /n</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">stdout</span><span class="o">=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">GoldFile</span><span class="p">(</span><span class="s2">&quot;gold/exists.gold&quot;</span><span class="p">,</span> <span class="n">normalize_eol</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.zip_content.ZipContent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ZipContent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">includes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excludes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.zip_content.ZipContent" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Tests that a compressed archived contains or excludes a give entry. Supported archive types are:</dt><dd><ul class="simple">
+<li><p>.bz2</p></li>
+<li><p>.tar.gz</p></li>
+<li><p>.tgz</p></li>
+<li><p>.tar.bz2</p></li>
+<li><p>.tbz</p></li>
+<li><p>.tb2</p></li>
+<li><p>.zip</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>includes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span>) – A list of one more path relative of from the archive root of the entity to test to exist.</p></li>
+<li><p><strong>excludes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span>) – A list of one more path relative of from the archive root of the entity to test to not exist.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing item
+in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Optional value used to help provide better context in the test message.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Test if a zip file contains a certain files.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">contains</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lorem.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;lorem3/lorem.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;lorem2.txt&#39;</span><span class="p">]</span>
+<span class="n">content_tester</span> <span class="o">=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">ZipContent</span><span class="p">(</span><span class="n">includes</span><span class="o">=</span><span class="n">contains</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;lorem.zip&quot;</span><span class="p">,</span> <span class="n">exists</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">content_tester</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another example of the above using the File object directly</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;lorem.tar.gz&quot;</span><span class="p">)</span>
+<span class="n">contains</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lorem.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;lorem3/lorem.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;lorem2.txt&#39;</span><span class="p">]</span>
+<span class="n">tar</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">ZipContent</span><span class="p">(</span><span class="n">includes</span><span class="o">=</span><span class="n">contains</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.file_callback.FileContentCallback">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">FileContentCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">killOnFailure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.file_callback.FileContentCallback" title="Link to this definition">¶</a></dt>
+<dd><p>Allow for defining custom content tests for a file or stream object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback</strong> – The callback function.</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>description</strong> – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>kill_on_failure</strong> – Setting this to True will kill the test from processing the rest of the test run and any existing item
+in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback Interface:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">errorMessage</span>
+</pre></div>
+</div>
+<p><strong>data</strong>: is file contents</p>
+<p><strong>returns</strong>: either a string describing what’s wrong with the test if it fails or
+‘’ or None if the test succeed.</p>
+</dd></dl>
+
+</section>
+<section id="file-system">
+<h2>File System<a class="headerlink" href="#file-system" title="Link to this heading">¶</a></h2>
+<p>Test file system for state.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.file_exists.FileExists">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">FileExists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.file_exists.FileExists" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the file exists or does not exist on Disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exists</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Test that is the file exists if True, else non-existence.</p></li>
+<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing item
+in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.directory_exists.DirectoryExists">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DirectoryExists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.directory_exists.DirectoryExists" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the file exists or does not exist on Disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exists</strong> – Test that is the directory exists if True, else non-existence.</p></li>
+<li><p><strong>test_value</strong> – The runtime value we will test.
+This is normally a string that is used to reference the eventinfo object for a runtime value.
+However it might be a user defined value, such as a path to a file.
+It can also be a function that will be called to return the expected content to test against.</p></li>
+<li><p><strong>kill_on_failure</strong> – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+<li><p><strong>description</strong> – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="composeable">
+<h2>Composeable<a class="headerlink" href="#composeable" title="Link to this heading">¶</a></h2>
+<p>Often it is useful to compose a set of test. These objects allow testing for a set of conditions.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.container.Any">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Any</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.container.Any" title="Link to this definition">¶</a></dt>
+<dd><p>Passes if any of the provided Tester passes.
+Provided in as a Global to help with ease of use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*lst</strong> – The function list of all Testers provided</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Test is the return code is 0 or 5</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">ReturnCode</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Test that the stdout stream of process match one of two possible gold files</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Streams</span><span class="o">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span><span class="s2">&quot;gold/hello1.gold&quot;</span><span class="p">,</span> <span class="s2">&quot;gold/hello2.gold&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.container.All">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">All</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.container.All" title="Link to this definition">¶</a></dt>
+<dd><p>Passes if all of the provided Tester pass.
+This can also be achieved in many cases by just using the <cite>+=</cite> operator on the testable property.
+Provided in as a Global to help with ease of use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>*lst</strong> – The function list of all Testers provided</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Test is the File object</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;foo.txt&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Content</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span>
+                <span class="n">Testers</span><span class="o">.</span><span class="n">ContainsExpression</span><span class="p">(</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span> <span class="s1">&#39;Has value1&#39;</span><span class="p">)</span>
+                <span class="n">Testers</span><span class="o">.</span><span class="n">ContainsExpression</span><span class="p">(</span><span class="s2">&quot;value2&quot;</span><span class="p">,</span> <span class="s1">&#39;Has value2&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
+<span class="c1"># this is the same as saying...</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Content</span> <span class="o">=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">ContainsExpression</span><span class="p">(</span><span class="s2">&quot;value1&quot;</span><span class="p">,</span> <span class="s1">&#39;Has value1&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Content</span> <span class="o">+=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">ContainsExpression</span><span class="p">(</span><span class="s2">&quot;value2&quot;</span><span class="p">,</span> <span class="s1">&#39;Has value2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Test that the stdout stream of process match a gold files and does not contain an expression.
+In this case the gold file might have a wild card for a data section, which normally can be ignored,
+unless it contains a certain values.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Streams</span><span class="o">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="n">All</span><span class="p">(</span>
+    <span class="s2">&quot;gold/hello1.gold&quot;</span><span class="p">,</span>
+    <span class="n">Testers</span><span class="o">.</span><span class="n">ExcludesExpression</span><span class="p">(</span><span class="s2">&quot;bad value&quot;</span><span class="p">,</span> <span class="s2">&quot;Does not contain &#39;bad value&#39;&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.container.Not">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Not</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">testobj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.container.Not" title="Link to this definition">¶</a></dt>
+<dd><p>Results in the negation of the Test as passing.
+The Python not operator <cite>!</cite> cannot be used as it results in immediate result.
+This allows for a delay result needed for composing more complex tester logic.
+Provided in as a Global to help with ease of use.</p>
+<p class="rubric">Example</p>
+<p>Test is the return code is a non-zero value</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">ReturnCode</span> <span class="o">=</span> <span class="n">Not</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="lambda">
+<h2>Lambda<a class="headerlink" href="#lambda" title="Link to this heading">¶</a></h2>
+<p>When something custom is needed there is a general lambda tester to make it easy to test about anything</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="autest.testers.lambda_tester.Lambda">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kill_on_failure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.testers.lambda_tester.Lambda" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Allow providing to python function to:</dt><dd><ol class="arabic simple">
+<li><p>Provide a custom test</p></li>
+<li><p>Custom logic to execute as part of an AuTest event object being called.</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – The callback function to call</p></li>
+<li><p><strong>kill_on_failure</strong> – Setting this to True will kill the test from processing the rest of the test run and any existing
+item in the event queue for the current scope.
+This should only be used in cases when a failure mean we really need to do a hard stop.
+For example need to stop because the test ran to long.</p></li>
+<li><p><strong>description_group</strong> – This is extra information about the file, process, etc that might be useful to give the test more context,
+should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
+</ul>
+</dd>
+</dl>
+<p>Callback Interface:</p>
+<blockquote>
+<div><p>callback(eventinfo)</p>
+<p>callback(eventinfo,tester)</p>
+</div></blockquote>
+<p>Where:</p>
+<blockquote>
+<div><p><strong>eventinfo</strong>: Object related to the event or test property the tester is mapped to.</p>
+<p><strong>tester</strong>: Reference to the Lambda object. Can be used for better control setting state.</p>
+</div></blockquote>
+<p>The callback is expected to return a tuple of <cite>(result:resulttype, description:str, message:str)</cite> where:</p>
+<blockquote>
+<div><p><strong>resulttype</strong>: is the ????</p>
+<p><strong>description</strong>: A string describing what the Lambda is testing</p>
+<p><strong>message</strong>: A string describing the result of the test.</p>
+</div></blockquote>
+<p class="rubric">Example</p>
+<p>This can also be use to help with advance Flow control by reacting to the eventinfo object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">StopProcess</span><span class="p">(</span><span class="n">event</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">TotalRunTime</span> <span class="o">&gt;</span> <span class="n">time</span><span class="p">:</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">Stop</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;this is a test&quot;</span><span class="p">,</span> <span class="s2">&quot;this is what happened&quot;</span>
+
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="c1"># Maps call back to the Running Event</span>
+<span class="c1"># This will stop the test in after it run for at least 1 second.</span>
+<span class="n">t</span><span class="o">.</span><span class="n">RunningEvent</span><span class="o">.</span><span class="n">Connect</span><span class="p">(</span>
+    <span class="n">Testers</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">ev</span><span class="p">:</span> <span class="n">StopProcess</span><span class="p">(</span><span class="n">ev</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Define a custom test.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">(</span><span class="s2">&quot;Get data of Python version&quot;</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Command</span> <span class="o">=</span> <span class="s2">&quot;python --version&quot;</span>
+<span class="n">t</span><span class="o">.</span><span class="n">ReturnCode</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Streams</span><span class="o">.</span><span class="n">All</span><span class="o">.</span><span class="n">AbsPath</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">custom_test</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">tester</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data1</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">GetContent</span><span class="p">(</span><span class="n">event</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">data1</span> <span class="o">==</span> <span class="n">data2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Check that versions match&quot;</span><span class="p">,</span> <span class="s2">&quot;Python versions did matched&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Check that versions match&quot;</span><span class="p">,</span> <span class="s2">&quot;Python versions did not matched&quot;</span><span class="p">)</span>
+
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">(</span><span class="s2">&quot;Do it again&quot;</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Command</span> <span class="o">=</span> <span class="s2">&quot;python --version&quot;</span>
+<span class="n">t</span><span class="o">.</span><span class="n">ReturnCode</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">t</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Streams</span><span class="o">.</span><span class="n">All</span><span class="o">.</span><span class="n">Content</span> <span class="o">=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">Lambda</span><span class="p">(</span><span class="n">custom_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">AuTest</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction.html#what-is-gold-file-testing">What is Gold File Testing?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/general_design.html">General Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/core_items.html">Objects for Defining Tests</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="main.html">User API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test.html">Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testrun.html">TestRun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process.html">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="streams.html">Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk.html">Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory.html">Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conditions.html">Condition Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="when.html">When namespace</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tester namespace</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/cli.html">Command Line options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release Notes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="main.html">User API</a><ul>
+      <li>Previous: <a href="when.html" title="previous chapter">When namespace</a></li>
+      <li>Next: <a href="../usage/cli.html" title="next chapter">Command Line options</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2019, Jason Kenny.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/API/testers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
