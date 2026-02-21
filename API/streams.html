@@ -54,6 +54,82 @@ By default each property will set a tester object or str to the File.Content tes
 </div>
 <section id="testable-properties">
 <h2>Testable properties:<a class="headerlink" href="#testable-properties" title="Link to this heading">¶</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stdout">
+<span class="sig-name descname"><span class="pre">stdout</span></span><a class="headerlink" href="#stdout" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the output from stdout matches a gold file.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="stderr">
+<span class="sig-name descname"><span class="pre">stderr</span></span><a class="headerlink" href="#stderr" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the output from stderr matches a gold file.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="All">
+<span class="sig-name descname"><span class="pre">All</span></span><a class="headerlink" href="#All" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the mixed output of stdout and stderr matches a gold file.
+Should be what we see on the console.
+However, various buffering behaviors can affect the order seen.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Debug">
+<span class="sig-name descname"><span class="pre">Debug</span></span><a class="headerlink" href="#Debug" title="Link to this definition">¶</a></dt>
+<dd><p>A virtual stream that tests the output that is filtered to contain the Debug information.
+The stream will search for a pattern of <cite>‘^debug: ‘</cite> or <cite>‘^debug: ‘</cite>.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Verbose">
+<span class="sig-name descname"><span class="pre">Verbose</span></span><a class="headerlink" href="#Verbose" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the output that is filtered to contain the Verbose information.
+The stream will search for a pattern of <cite>‘^verbose: ‘</cite>.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Warning">
+<span class="sig-name descname"><span class="pre">Warning</span></span><a class="headerlink" href="#Warning" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the output that is filtered to contain the Warning information.
+The stream will search for a pattern of <cite>‘(A|s)warning?s?(([?!: ])|(.s))D’</cite>.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Error">
+<span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#Error" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the output that is filtered to contain the Error information.
+The stream will search for a pattern of <cite>‘(A|s)error?s?(([?!: ])|(.s))D’</cite> or <cite>‘fail$’</cite>.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string - file name of the gold file. Path is relative from the location of the test file.</p>
+</dd></dl>
+
 </section>
 </section>
 

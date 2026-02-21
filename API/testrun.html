@@ -331,6 +331,72 @@ Values are shared and can be overridden on child objects.</p>
 
 <section id="testable-properties">
 <h2>Testable properties:<a class="headerlink" href="#testable-properties" title="Link to this heading">¶</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="StillRunningBefore">
+<span class="sig-name descname"><span class="pre">StillRunningBefore</span></span><a class="headerlink" href="#StillRunningBefore" title="Link to this definition">¶</a></dt>
+<dd><p>Tests that the process is still running before the test run start running</p>
+<p><strong>Event</strong>
+: Setup</p>
+<p><strong>Default type</strong>
+: Process object</p>
+<p><strong>Example:</strong></p>
+<p>Test the server process is still running before the second Test Run starts</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">=</span><span class="n">Test</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s2">&quot;ts&quot;</span><span class="p">,</span><span class="s2">&quot;myserver –port 8080&quot;</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">(</span><span class="s2">&quot;server started properly&quot;</span><span class="p">)</span>
+<span class="c1"># ...</span>
+
+<span class="n">t2</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">(</span><span class="s2">&quot;server started properly&quot;</span><span class="p">)</span>
+<span class="n">t2</span><span class="o">.</span><span class="n">StillRunningBefore</span><span class="o">=</span><span class="n">p</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="StillRunningAfter">
+<span class="sig-name descname"><span class="pre">StillRunningAfter</span></span><a class="headerlink" href="#StillRunningAfter" title="Link to this definition">¶</a></dt>
+<dd><p>Tests that the process is still running before the test run start running</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: Process object</p>
+<p><strong>Example:</strong></p>
+<p>Test the server process is still running after the test run is command finishes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">=</span><span class="n">Test</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="s2">&quot;ts&quot;</span><span class="p">,</span><span class="s2">&quot;myserver –port 8080&quot;</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">(</span><span class="s2">&quot;server started properly&quot;</span><span class="p">)</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">StillRunningAfter</span><span class="o">=</span><span class="n">p</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NotRunningBefore">
+<span class="sig-name descname"><span class="pre">NotRunningBefore</span></span><a class="headerlink" href="#NotRunningBefore" title="Link to this definition">¶</a></dt>
+<dd><p>Tests that the process is not running before the test run start running</p>
+<p><strong>Event</strong>
+: Setup</p>
+<p><strong>Default type</strong>
+: Process object</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NotRunningAfter">
+<span class="sig-name descname"><span class="pre">NotRunningAfter</span></span><a class="headerlink" href="#NotRunningAfter" title="Link to this definition">¶</a></dt>
+<dd><p>Tests that the process is still running before the test run start running</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: Process object</p>
+<p><strong>Example:</strong></p>
+<p>Test the server process stopped</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Command</span><span class="o">=</span><span class="s2">&quot;myserver –port 8080&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">(</span><span class="s2">&quot;server started properly&quot;</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">Processes</span><span class="o">.</span><span class="n">Default</span><span class="o">.</span><span class="n">Command</span> <span class="o">=</span> <span class="s2">&quot;kill-server&quot;</span>
+<span class="n">t</span><span class="o">.</span><span class="n">NotRunningAfter</span> <span class="o">=</span> <span class="n">p</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 </section>
 

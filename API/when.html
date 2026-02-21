@@ -55,8 +55,8 @@ fallback to a PortReady call</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>port</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – The port to check.</p></li>
-<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The address to bind to.</p></li>
-<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
+<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The address to bind to.</p></li>
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
 <li><p><strong>address_family</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The family of space to use. Checks both IPv4 and Ipv6 spaces by default (‘inet’). For
 the possible values of this string, see the “kind” parameter to
 psutil.net_connections().</p></li>
@@ -87,8 +87,8 @@ psutil.net_connections().</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>port</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – The port to check.</p></li>
-<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The address to bind to.</p></li>
-<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
+<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The address to bind to.</p></li>
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
 </ul>
 </dd>
 </dl>
@@ -102,8 +102,8 @@ psutil.net_connections().</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>port</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – The port to check.</p></li>
-<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The address to bind to.</p></li>
-<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
+<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The address to bind to.</p></li>
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
 </ul>
 </dd>
 </dl>
@@ -125,9 +125,9 @@ and can send a response to</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>port</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – The port to check.</p></li>
-<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The address to bind to. If not specified, both localhost and ip6-localhost will
+<li><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The address to bind to. If not specified, both localhost and ip6-localhost will
 be checked.</p></li>
-<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – How long to wait before timing out. Ignored unless code falls back to PortReady call.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -170,7 +170,7 @@ It will return true when all port return that they are ready.</p>
 <dd><p>Tests to see if the directory has exists.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>directory_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="directory.html#autest.testenities.directory.Directory" title="autest.testenities.directory.Directory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Directory</span></code></a>]</span>) – The path to the directory to test</p>
+<dd class="field-odd"><p><strong>directory_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <a class="reference internal" href="directory.html#autest.testenities.directory.Directory" title="autest.testenities.directory.Directory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Directory</span></code></a></span>) – The path to the directory to test</p>
 </dd>
 </dl>
 </dd></dl>
@@ -196,7 +196,7 @@ If the directory does not exist, then it will test for existence of the director
 <dd><p>Tests to see if the directory does not exist.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>directory_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="directory.html#autest.testenities.directory.Directory" title="autest.testenities.directory.Directory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Directory</span></code></a>]</span>) – The path to the directory to test</p>
+<dd class="field-odd"><p><strong>directory_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <a class="reference internal" href="directory.html#autest.testenities.directory.Directory" title="autest.testenities.directory.Directory"><code class="xref py py-class docutils literal notranslate"><span class="pre">Directory</span></code></a></span>) – The path to the directory to test</p>
 </dd>
 </dl>
 </dd></dl>
@@ -207,7 +207,7 @@ If the directory does not exist, then it will test for existence of the director
 <dd><p>Tests that a file exists on disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="file.html#autest.testenities.file.File" title="autest.testenities.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>]</span>) – The path to the file to test</p>
+<dd class="field-odd"><p><strong>file_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <a class="reference internal" href="file.html#autest.testenities.file.File" title="autest.testenities.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a></span>) – The path to the file to test</p>
 </dd>
 </dl>
 </dd></dl>
@@ -219,7 +219,7 @@ If the directory does not exist, then it will test for existence of the director
 If the file does not exist, then it will test for existence of the file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="file.html#autest.testenities.file.File" title="autest.testenities.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>]</span>) – The path to the file to test</p>
+<dd class="field-odd"><p><strong>file_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <a class="reference internal" href="file.html#autest.testenities.file.File" title="autest.testenities.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a></span>) – The path to the file to test</p>
 </dd>
 </dl>
 </dd></dl>
@@ -230,7 +230,7 @@ If the file does not exist, then it will test for existence of the file</p>
 <dd><p>Tests that a file not exists on disk.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>file_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="file.html#autest.testenities.file.File" title="autest.testenities.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a>]</span>) – The path to the file to test</p>
+<dd class="field-odd"><p><strong>file_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <a class="reference internal" href="file.html#autest.testenities.file.File" title="autest.testenities.file.File"><code class="xref py py-class docutils literal notranslate"><span class="pre">File</span></code></a></span>) – The path to the file to test</p>
 </dd>
 </dl>
 </dd></dl>

@@ -156,6 +156,63 @@ It can be an absolute path as well given the file was defined that way.</p>
 <section id="testable-properties">
 <h2>Testable properties:<a class="headerlink" href="#testable-properties" title="Link to this heading">¶</a></h2>
 <p>These are the testable properties of the file object.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Exists">
+<span class="sig-name descname"><span class="pre">Exists</span></span><a class="headerlink" href="#Exists" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the Directory exists or does not exist. If set to None no test will happen</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: Boolean</p>
+<p><strong>Example:</strong></p>
+<p>Test that a file exists at the end of the Test run</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;logs/errors.log&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Exists</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Size">
+<span class="sig-name descname"><span class="pre">Size</span></span><a class="headerlink" href="#Size" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the size is equal the value provided</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: integer</p>
+<p><strong>Example</strong></p>
+<p>Test that a file size is 1024 bytes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;some.data&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Size</span> <span class="o">=</span> <span class="mi">1024</span>
+</pre></div>
+</div>
+<p>Test that a file size is less than 1096 bytes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;some.data&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Size</span> <span class="o">=</span> <span class="n">Testers</span><span class="o">.</span><span class="n">LessThan</span><span class="p">(</span><span class="mi">1096</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Content">
+<span class="sig-name descname"><span class="pre">Content</span></span><a class="headerlink" href="#Content" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the content matches the provided gold file</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: string ( i.e. file name to gold file)</p>
+<p><strong>Example:</strong></p>
+<p>Test that output file matches expected results</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span> <span class="o">=</span> <span class="n">Test</span><span class="o">.</span><span class="n">AddTestRun</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">Disk</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s2">&quot;out.data&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">Content</span> <span class="o">=</span> <span class="s2">&quot;gold/content.gold&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 </section>
 

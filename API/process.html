@@ -345,8 +345,48 @@ Values are shared and can be overridden on child objects.</p>
 
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Streams">
+<span class="sig-name descname"><span class="pre">Streams</span></span><a class="headerlink" href="#Streams" title="Link to this definition">¶</a></dt>
+<dd><p>An object that defines a number of streams and virtual streams of the process.
+See Streams for more information.</p>
+</dd></dl>
+
 <section id="testable-properties">
 <h2>Testable properties:<a class="headerlink" href="#testable-properties" title="Link to this heading">¶</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ReturnCode">
+<span class="sig-name descname"><span class="pre">ReturnCode</span></span><a class="headerlink" href="#ReturnCode" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the return code equals to the expected value.
+If None, it is expected the process will be killed and will not be able to return a value.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: Integer</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Time">
+<span class="sig-name descname"><span class="pre">Time</span></span><a class="headerlink" href="#Time" title="Link to this definition">¶</a></dt>
+<dd><p>Test that the process finished within the time in seconds provided by default.
+This does not kill the process.
+It will only report that after the process finished that it failed meet the requirement of the test.</p>
+<p><strong>Event</strong>
+: Finished</p>
+<p><strong>Default type</strong>
+: float</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="TimeOut">
+<span class="sig-name descname"><span class="pre">TimeOut</span></span><a class="headerlink" href="#TimeOut" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the process if the process is still running after the time provided in seconds by default.</p>
+<p><strong>Event</strong>
+: Running</p>
+<p><strong>Default type</strong>
+: float</p>
+</dd></dl>
+
 </section>
 </section>
 

@@ -61,9 +61,9 @@ It can also be a function that will be called to return the expected content to 
 item in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -77,7 +77,7 @@ should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – The value we are testing for</p></li>
-<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</span>) – The runtime value we will test.
+<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The runtime value we will test.
 This is normally a string that is used to reference the eventinfo object for a runtime value.
 However it might be a user defined value, such as a path to a file.
 It can also be a function that will be called to return the expected content to test against.</p></li>
@@ -85,9 +85,9 @@ It can also be a function that will be called to return the expected content to 
 item in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -109,9 +109,9 @@ It can also be a function that will be called to return the expected content to 
 item in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -133,9 +133,9 @@ It can also be a function that will be called to return the expected content to 
 queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context, should be
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context, should be
 in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -157,9 +157,9 @@ It can also be a function that will be called to return the expected content to 
 in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -181,9 +181,9 @@ It can also be a function that will be called to return the expected content to 
 item in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -209,7 +209,7 @@ on each line with re.search.</p>
 item in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
 <li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
@@ -251,7 +251,7 @@ in the area are to be ignored.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>goldfile</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the gold file to be used for the test. Assumed to relative to the location of the test file.</p></li>
-<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The runtime value we will test.
+<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The runtime value we will test.
 This is normally a string that is used to reference the eventinfo object for a runtime value.
 However it might be a user defined value, such as a path to a file.
 It can also be a function that will be called to return the expected content to test against.</p></li>
@@ -265,7 +265,7 @@ operating system such as Unix or Windows systems. If False no normalizing will h
 gold comparison will be case-sensitive.</p></li>
 <li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>
@@ -294,13 +294,13 @@ should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>includes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span>) – A list of one more path relative of from the archive root of the entity to test to exist.</p></li>
-<li><p><strong>excludes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span>) – A list of one more path relative of from the archive root of the entity to test to not exist.</p></li>
+<li><p><strong>includes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – A list of one more path relative of from the archive root of the entity to test to exist.</p></li>
+<li><p><strong>excludes</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – A list of one more path relative of from the archive root of the entity to test to not exist.</p></li>
 <li><p><strong>kill_on_failure</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Setting this to True will kill the test from processing the rest of the test run and any existing item
 in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Optional value used to help provide better context in the test message.</p></li>
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional value used to help provide better context in the test message.</p></li>
 </ul>
 </dd>
 </dl>
@@ -363,7 +363,7 @@ should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>exists</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Test that is the file exists if True, else non-existence.</p></li>
-<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The runtime value we will test.
+<li><p><strong>test_value</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – The runtime value we will test.
 This is normally a string that is used to reference the eventinfo object for a runtime value.
 However it might be a user defined value, such as a path to a file.
 It can also be a function that will be called to return the expected content to test against.</p></li>
@@ -371,9 +371,9 @@ It can also be a function that will be called to return the expected content to 
 in the event queue for the current scope.
 This should only be used in cases when a failure mean we really need to do a hard stop.
 For example need to stop because the test ran to long.</p></li>
-<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
+<li><p><strong>description_group</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is extra information about the file, process, etc that might be useful to give the test more context,
 should be in form of ‘Type: name’, ie ‘Process: proc1’</p></li>
-<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
+<li><p><strong>description</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – This is what we are testing such as “Testing return code is 5” or “Checking file file X exists”</p></li>
 </ul>
 </dd>
 </dl>

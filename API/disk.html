@@ -68,16 +68,16 @@ If False the relative path is based on the current location of the test file</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – The path to the file. This is relative to the runtime state.</p></li>
-<li><p><strong>exists</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]</span>) – Can be set to True to test that the file exists or False to test that it does not exist
+<li><p><strong>exists</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Can be set to True to test that the file exists or False to test that it does not exist
 Can be set to a tester object for a custom test.</p></li>
-<li><p><strong>size</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – Can be set a integer value greater or equal to 0 to test that file matches the exact size.
+<li><p><strong>size</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Can be set a integer value greater or equal to 0 to test that file matches the exact size.
 Can be set to a tester object for a custom test.</p></li>
 <li><p><strong>execute</strong> – currently ignored</p></li>
 <li><p><strong>id</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – A custom value that can be used to refer to the file as part of the Disk object later in the test file.</p></li>
 <li><p><strong>runtime</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Can be normally ignored.
 By default this is True which mean the relative path is based on the current sandbox/runtime path is the root.
 If False the relative path is based on the current location of the test file.</p></li>
-<li><p><strong>typename</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – Control if the file should be of a certain type.
+<li><p><strong>typename</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Control if the file should be of a certain type.
 This allows creation of File objects that might have extended functionality such as reading and
 writing json files via a dictionary interface.</p></li>
 </ul>

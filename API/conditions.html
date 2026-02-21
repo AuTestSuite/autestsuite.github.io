@@ -95,7 +95,7 @@ and the return code of the function provided by the check_func argument matches 
 :param msg: The message to print about the condition.
 :type pass_value: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>
 :param pass_value: Value to test for the condition to pass.
-:type neg_msg: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>
+:type neg_msg: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>
 :param neg_msg: Option message to print if the condition fails.
 :type shell: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>
 :param shell: Run the command in a shell vs running it without a shell.</p>
@@ -104,27 +104,24 @@ and the return code of the function provided by the check_func argument matches 
 <dl class="py function">
 <dt class="sig sig-object py" id="autest.conditions.process.EnsureVersion">
 <span class="sig-name descname"><span class="pre">EnsureVersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_parser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.conditions.process.EnsureVersion" title="Link to this definition">¶</a></dt>
-<dd><p>Returns a condition that will run a command and test the output matches a predefined version match callback.
-:type command: 
-:param command: The command to run to get the version value</p>
-<blockquote>
-<div><p>The common form of this is <cite>&lt;program&gt; –version</cite> or <cite>&lt;program&gt; -v</cite></p>
-</div></blockquote>
+<dd><p>Returns a condition that will run a command and test the output matches a predefined version match callback.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>command</strong> – The command to run to get the version value
+The common form of this is <cite>&lt;program&gt; –version</cite> or <cite>&lt;program&gt; -v</cite></p></li>
 <li><p><strong>min_version</strong> – Optional minimum version that we much match.
 If not provided and value less or equal to the max version will be accepted</p></li>
 <li><p><strong>max_version</strong> – <p>Optional maximum version that we much match.
-If not provided and value greater or equal to the min version will be accepted
-.. note:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">One</span> <span class="n">value</span> <span class="k">for</span> <span class="n">min_version</span> <span class="ow">or</span> <span class="n">max_version</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">provided</span><span class="o">.</span>
-<span class="n">Both</span> <span class="n">cannot</span> <span class="n">be</span> <span class="kc">None</span><span class="o">.</span>
-</pre></div>
+If not provided and value greater or equal to the min version will be accepted</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One value for min_version or max_version has to be provided.
+Both cannot be None.</p>
 </div>
 </p></li>
 <li><p><strong>msg</strong> – The message to print about the condition.</p></li>
-<li><p><strong>output_parser</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]]</span>) – Optional callback function that can be used retrieve the version.
+<li><p><strong>output_parser</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – Optional callback function that can be used retrieve the version.
 The default function run a regular expression of “(?P&lt;ver&gt;d+.d+(?:.d+)*)”
 If this does not work for the application being tested a custom function can be provided here.
 The function will be given a string of the out of the command to parse.
@@ -135,21 +132,23 @@ It has to return back a string with the version value in it or None is it failed
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Skip test if curl version is not 7.47.0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">SkipIf</span><span class="p">(</span><span class="n">Condition</span><span class="o">.</span><span class="n">EnsureVersion</span><span class="p">([</span><span class="s1">&#39;curl&#39;</span><span class="p">,</span><span class="s1">&#39;--version&#39;</span><span class="p">]),</span><span class="s2">&quot;7.47.0&#39;)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="autest.conditions.process.HasProgram">
 <span class="sig-name descname"><span class="pre">HasProgram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">program</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pass_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.conditions.process.HasProgram" title="Link to this definition">¶</a></dt>
-<dd><p>Returns a condition that will test is a application can be found on the path.
-:type program: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
-:param program: The program to test for.</p>
-<blockquote>
-<div><p>On windows .exe does not need to be added as the default
-environment variable of <strong>PATHEXT</strong> will be used.</p>
-</div></blockquote>
+<dd><p>Returns a condition that will test is a application can be found on the path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>program</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The program to test for.
+On windows .exe does not need to be added as the default
+environment variable of <strong>PATHEXT</strong> will be used.</p></li>
 <li><p><strong>msg</strong> – The message to print about the condition.</p></li>
 <li><p><strong>pass_value</strong> – Value to test for the condition to pass.
 In this case True is for program was found and False for when the it was not.</p></li>
@@ -175,27 +174,28 @@ On Window this mean running with admin rights
 <dl class="py function">
 <dt class="sig sig-object py" id="autest.conditions.process.HasPythonPackage">
 <span class="sig-name descname"><span class="pre">HasPythonPackage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autest.conditions.process.HasPythonPackage" title="Link to this definition">¶</a></dt>
-<dd><p>Returns a condition that test if a python package is installed by calling the current active pip.
-:type package: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span>
-:param package: One or more packages to test for. The input can be a space seperated string or a list.
-:type msg: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
-:param msg: The message to print if the packages are not found</p>
+<dd><p>Returns a condition that test if a python package is installed by calling the current active pip.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>package</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – One or more packages to test for. The input can be a space seperated string or a list.</p></li>
+<li><p><strong>msg</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The message to print if the packages are not found</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
-<p>Test to see if requests is installed.
-.. code:: python3</p>
-<blockquote>
-<div><p>Test.SkipUnless(Condition.HasProgram.HasPythonPackage(“requests”))</p>
-</div></blockquote>
-<p>Test to see if requests and microserver is installed.
-.. code:: python3</p>
-<blockquote>
-<div><p>Test.SkipUnless(Condition.HasProgram.HasPythonPackage(“requests microserver”))</p>
-</div></blockquote>
-<p>or via a list.
-.. code:: python3</p>
-<blockquote>
-<div><p>Test.SkipUnless(Condition.HasProgram.HasPythonPackage([“requests”,”microserver”]))</p>
-</div></blockquote>
+<p>Test to see if requests is installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">SkipUnless</span><span class="p">(</span><span class="n">Condition</span><span class="o">.</span><span class="n">HasProgram</span><span class="o">.</span><span class="n">HasPythonPackage</span><span class="p">(</span><span class="s2">&quot;requests&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Test to see if requests and microserver is installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">SkipUnless</span><span class="p">(</span><span class="n">Condition</span><span class="o">.</span><span class="n">HasProgram</span><span class="o">.</span><span class="n">HasPythonPackage</span><span class="p">(</span><span class="s2">&quot;requests microserver&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>or via a list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Test</span><span class="o">.</span><span class="n">SkipUnless</span><span class="p">(</span><span class="n">Condition</span><span class="o">.</span><span class="n">HasProgram</span><span class="o">.</span><span class="n">HasPythonPackage</span><span class="p">([</span><span class="s2">&quot;requests&quot;</span><span class="p">,</span><span class="s2">&quot;microserver&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
